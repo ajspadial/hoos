@@ -14,7 +14,8 @@ But, what does Higher-order Open Science mean? Probably you guessed it's a pun. 
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 OK [@auremoser](https://twitter.com/auremoser), here comes my explanation. In Computer Science, a higher-order function is one that returns a function as result, or can take one or more functions as arguments. Example:  
-```javascript
+
+{% highlight javascript %}
 function createMult(m) {
   return function (a) {
     return a * m;
@@ -23,7 +24,7 @@ function createMult(m) {
 
 var mult2 = createMult(2);
 mult2(3);  // result is 6
-```
+{% endhighlight %}
 
 In this example, the `createMult()` function will return a diferent function for every given value of `m`.
 
