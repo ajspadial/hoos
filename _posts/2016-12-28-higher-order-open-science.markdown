@@ -13,7 +13,7 @@ But, what does Higher-order Open Science mean? Probably you guessed it's a pun. 
 <blockquote class="twitter-tweet" data-lang="es"><p lang="en" dir="ltr">often, i wish there were a file in OSS called ORIGINSTORY.md, explaining why you named your project as such, what puns you tried to play on</p>&mdash; Aure Moser (@auremoser) <a href="https://twitter.com/auremoser/status/748326674572390400">30 de junio de 2016</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-OK [@auremoser](https://twitter.com/auremoser), here comes my explanation. In Computer Science, a higher-order function is one that returns a function as result, or can take one or more functions as arguments. Example:
+OK [@auremoser](https://twitter.com/auremoser), here comes my explanation. In Computer Science, a higher-order function is one that returns a function as result, or can take one or more functions as arguments. Example:  
 ```javascript
 function createMult(m) {
   return function (a) {
