@@ -16,7 +16,7 @@
 title: Higher-order Open Science
 email: antonio@spadial.com
 description: > # this means to ignore newlines until "baseurl:"
-  An open science notebook for my PhD in research data
+  An open notebook for my PhD in research data
   management plans. I'll write about other related topics, specially in the open science and open
   data spectrum associated to agro sciences.
 baseurl: "" # the subpath of your site, e.g. /blog
