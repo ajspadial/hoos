@@ -12,4 +12,4 @@ This blog you're reading is my **Open Notebook**, here's you'll find my day-by-d
 
 Other topics in the scope of this blog will be [Open Journal System](http://pkp.sku.ca/ojs), data-driven agriculture, and news related with open software, open data and open science.
 
-This will be a multilingual blog, with posts in English, Spanish and [Asturian](https://en.wikipedia.org/wiki/Asturian_language). Language will be chosen depending of the scope of the post. If you find something you think are interested in, and feel unable to read, don't hesitate to contact me asking for further information. I'll do my best to help you back.
+This will be a multilingual blog, with posts in English, Spanish and [Asturian](https://en.wikipedia.org/wiki/Asturian_language). Language will be chosen depending on the scope of the post. If you find something you think are interested in, and feel unable to read, don't hesitate to contact me asking for further information. I'll do my best to help you back.
