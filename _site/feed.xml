@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://hoos.spadial.org/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://hoos.spadial.org/feed.xml" rel="self" type="application/atom+xml" /><link href="http://hoos.spadial.org/" rel="alternate" type="text/html" /><updated>2017-01-13T12:32:35+01:00</updated><id>http://hoos.spadial.org//</id><title type="html">Higher-order Open Science</title><subtitle>An open notebook for my PhD in research data management plans. I'll write about other related topics, specially in the open science and open data spectrum associated to agro sciences.
+</subtitle><entry xml:lang="en"><title type="html">Canciella - an EZProxy alternative 1/n</title><link href="http://hoos.spadial.org/canciella/ezproxy/2017/01/12/canciella-an-ezproxy-alternative.html" rel="alternate" type="text/html" title="Canciella - an EZProxy alternative 1/n" /><published>2017-01-12T12:46:00+01:00</published><updated>2017-01-12T12:46:00+01:00</updated><id>http://hoos.spadial.org/canciella/ezproxy/2017/01/12/canciella-an-ezproxy-alternative</id><content type="html" xml:base="http://hoos.spadial.org/canciella/ezproxy/2017/01/12/canciella-an-ezproxy-alternative.html">&lt;p&gt;Last year I worked a little on an #FOOS alternative to EZProxy. My first naïve tentative was coded in PHP and you can’t find it at &lt;a href=&quot;http://github.com/inia-es/canciella&quot;&gt;http://github.com/inia-es/canciella&lt;/a&gt;. &lt;em&gt;Canciella&lt;/em&gt; is the asturian for gate, gateway.&lt;/p&gt;
+
+&lt;p&gt;It lacks lots of details to be useful, but it gave me a glance about what we needed for a functional system. It was a prototype in the literal sense of the term.&lt;/p&gt;
+
+&lt;p&gt;Yesterday I started to work again on this project, and I took some notes about how EZProxy works, and what would my alternative would need.&lt;/p&gt;
+
+&lt;h1 id=&quot;how-does-ezproxy-work&quot;&gt;How does EZProxy work?&lt;/h1&gt;
+
+&lt;p&gt;EZProxy is a rewriting proxy server. Those articles explain how it works.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.oclc.org/support/services/ezproxy/documentation/learn/overview.en.html&quot;&gt;https://www.oclc.org/support/services/ezproxy/documentation/learn/overview.en.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.oclc.org/support/services/ezproxy/documentation/rewrite.en.html&quot;&gt;https://www.oclc.org/support/services/ezproxy/documentation/rewrite.en.html
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.oclc.org/ezproxy/features.en.html&quot;&gt;https://www.oclc.org/ezproxy/features.en.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.oclc.org/support/services/ezproxy/documentation/cfg/proxybyhostname.en.html&quot;&gt;https://www.oclc.org/support/services/ezproxy/documentation/cfg/proxybyhostname.en.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I think OCLC is quite generous with all those technical details.&lt;/p&gt;
+
+&lt;p&gt;Here there are some more articles I explored in order to understand better what I wanted.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/EZproxy&quot;&gt;https://en.wikipedia.org/wiki/EZproxy&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Proxy_server&quot;&gt;https://en.wikipedia.org/wiki/Proxy_server&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Reverse_proxy&quot;&gt;https://en.wikipedia.org/wiki/Reverse_proxy&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;TL;DR; EZProxy is a rewriting proxy server with mixed features from forward and reverse proxies. I couldn’t find a name for that, but &lt;a href=&quot;https://en.wikipedia.org/wiki/Stone_skipping&quot;&gt;stone skipping&lt;/a&gt; comes to my mind to explain it.&lt;/p&gt;
+
+&lt;h1 id=&quot;my-requirements&quot;&gt;My requirements&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Technical requirements&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;URL rewriting&lt;/li&gt;
+  &lt;li&gt;Content rewriting&lt;/li&gt;
+  &lt;li&gt;Domain cookies forwarding&lt;/li&gt;
+  &lt;li&gt;LDAP auth (other auths may be welcomed too)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Non functional requirements&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Easy installation and configuration&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Requirements were quite clear, and I was thinking about what language to work with. Non functional requirements were the main point to take this decision.&lt;/p&gt;
+
+&lt;p&gt;After reading more and more about proxies, I changed my mind and decided to work on an Apache based proxy instead of writing my own module.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-apache-approach&quot;&gt;The Apache approach&lt;/h1&gt;
+
+&lt;p&gt;These is a list of Apache web server that provide the required features:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;URL rewriting
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mod_proxy&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mod_rewrite&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mod_proxy_http&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mod_proxy_ftp&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mod_proxy_connect&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Authentication
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mod_authnz_ldap&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Content rewriting
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mod_proxy_html&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I also wrote a small prototype to proxy domains the way EZProxy does. I know it’s a naïve approach too, but it shows me how the full system may work. Future work will use Apache ENVVARS.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-apache&quot; data-lang=&quot;apache&quot;&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;VirtualHost&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt; *.canciella.net:80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;
+&lt;/span&gt;  &lt;span class=&quot;nc&quot;&gt;RewriteEngine&lt;/span&gt; On
+
+  &lt;span class=&quot;nc&quot;&gt;RewriteCond&lt;/span&gt; ${SERVER_PROTOCOL} ^http$
+  &lt;span class=&quot;nc&quot;&gt;RewriteCond&lt;/span&gt; %{HTTP_HOST} ^(.*).canciella.net$
+  &lt;span class=&quot;nc&quot;&gt;RewriteRule&lt;/span&gt; ^(.*)$ http://%1/$0 [P]
+
+  &lt;span class=&quot;nc&quot;&gt;RewriteCond&lt;/span&gt; ${SERVER_PROTOCOL} ^https$
+  &lt;span class=&quot;nc&quot;&gt;RewriteCond&lt;/span&gt; %{HTTP_HOST} ^(.*).canciella.net$
+  &lt;span class=&quot;nc&quot;&gt;RewriteRule&lt;/span&gt; ^(.*)$ https://%1/$0 [P]
+
+&lt;span class=&quot;p&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;VirtualHost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Lastly those are the hand-writted notes I took during my research. I used a mix of English and Spanish, and probably they are useless for anyone else but my ownself of yesterday.
+&lt;img src=&quot;http://hoos.spadial.org/assets/img/alt-ezproxy-1.jpg&quot; alt=&quot;EZProxy notes 1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://hoos.spadial.org/assets/img/alt-ezproxy-2.jpg&quot; alt=&quot;EZProxy notes 2&quot; /&gt;&lt;/p&gt;</content><summary type="html">Last year I worked a little on an #FOOS alternative to EZProxy. My first naïve tentative was coded in PHP and you can’t find it at http://github.com/inia-es/canciella. Canciella is the asturian for gate, gateway.</summary></entry><entry xml:lang="en"><title type="html">HOWTO start, stop, debug CKAN</title><link href="http://hoos.spadial.org/ckan/sysadmin/2017/01/10/howto-start-stop-debug-ckan.html" rel="alternate" type="text/html" title="HOWTO start, stop, debug CKAN" /><published>2017-01-10T00:00:00+01:00</published><updated>2017-01-10T00:00:00+01:00</updated><id>http://hoos.spadial.org/ckan/sysadmin/2017/01/10/howto-start-stop-debug-ckan</id><content type="html" xml:base="http://hoos.spadial.org/ckan/sysadmin/2017/01/10/howto-start-stop-debug-ckan.html">&lt;p&gt;&lt;small&gt;&lt;em&gt;
+:es: Breves instrucciones para arrancar y deterner un servidor CKAN, especialmente en modo &lt;code class=&quot;highlighter-rouge&quot;&gt;DEBUG&lt;/code&gt;.&lt;br /&gt;
+&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;start-a-production-environment&quot;&gt;Start a production environment&lt;/h2&gt;
+&lt;p&gt;A CKAN production environment is served through a web server. This site &lt;a href=&quot;http://docs.ckan.org/en/latest/maintaining/installing/deployment.html#install-apache-modwsgi-modrpaf&quot;&gt;http://docs.ckan.org/en/latest/maintaining/installing/deployment.html#install-apache-modwsgi-modrpaf&lt;/a&gt; includes detailed instructions for configuring Apache as the web server provinding access to your CKAN installation.&lt;/p&gt;
+
+&lt;p&gt;You can avoid usging the &lt;code class=&quot;highlighter-rouge&quot;&gt;nginx&lt;/code&gt; server, by making the apache site to listen to any connection on port 80.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-apache&quot; data-lang=&quot;apache&quot;&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;VirtualHost&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt; *:80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;
+&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# ...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;VirtualHost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;stopping-a-production-environment&quot;&gt;Stopping a production environment&lt;/h2&gt;
+
+&lt;p&gt;To stop a production environment you can:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;stop the Apache/Nginx server (the one woring at port 80, and listening to connections from everywhere),&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo service apache2 stop&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;or, disable the ckan site&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo a2dissite ckan
+  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo service apache2 reload&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;starting-a-debug-environment&quot;&gt;Starting a debug environment&lt;/h2&gt;
+
+&lt;p&gt;Days ago I twitted on how to start CKAN in debug mode.&lt;/p&gt;
+
+&lt;blockquote class=&quot;twitter-tweet&quot; data-lang=&quot;es&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;TYL HOWTO run &lt;a href=&quot;https://twitter.com/hashtag/CKAN?src=hash&quot;&gt;#CKAN&lt;/a&gt; on debug mode: `paster plugin=ckan serve &amp;lt;ckan_conf.ini&amp;gt;` &lt;a href=&quot;https://t.co/5ppEsajSvh&quot;&gt;pic.twitter.com/5ppEsajSvh&lt;/a&gt;&lt;/p&gt;&amp;mdash; Antonio Sánchez-Pad. (@ajspadial) &lt;a href=&quot;https://twitter.com/ajspadial/status/790947600769900544&quot;&gt;25 de octubre de 2016&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;After doing so, your test CKAN will be available at &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:5000&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;You’ll have to activate your CKAN development environment before running &lt;code class=&quot;highlighter-rouge&quot;&gt;paster&lt;/code&gt;. This site &lt;a href=&quot;http://docs.ckan.org/en/latest/maintaining/installing/install-from-source.html&quot;&gt;http://docs.ckan.org/en/latest/maintaining/installing/install-from-source.html&lt;/a&gt; includes detailed instructions.&lt;/p&gt;
+
+&lt;p&gt;These are the needed steps:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;pyenv/bin/activate
+&lt;span class=&quot;gp&quot;&gt;(pyenv)$ &lt;/span&gt;paster serve /etc/ckan/default/production.ini &amp;amp;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;stopping-a-debug-environment&quot;&gt;Stopping a debug environment&lt;/h2&gt;
+
+&lt;p&gt;You may kill the paster serve process.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;ps -a | grep paster
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;kill&lt;/span&gt; -9 &amp;lt;paster_id&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;If you need to restart you can try &lt;code class=&quot;highlighter-rouge&quot;&gt;paster serve --reload &amp;lt;settings.ini&amp;gt;&lt;/code&gt;&lt;/p&gt;</content><summary type="html">:es: Breves instrucciones para arrancar y deterner un servidor CKAN, especialmente en modo DEBUG.</summary></entry><entry xml:lang="en"><title type="html">Higher-order Open Science?</title><link href="http://hoos.spadial.org/hoos/meta/2016/12/28/higher-order-open-science.html" rel="alternate" type="text/html" title="Higher-order Open Science?" /><published>2016-12-28T12:47:52+01:00</published><updated>2016-12-28T12:47:52+01:00</updated><id>http://hoos.spadial.org/hoos/meta/2016/12/28/higher-order-open-science</id><content type="html" xml:base="http://hoos.spadial.org/hoos/meta/2016/12/28/higher-order-open-science.html">&lt;p&gt;Welcome to this blog. The main reason I’m writing it is to serve as an &lt;strong&gt;open notebook&lt;/strong&gt; for my PhD. I’ll write on its goals soon, but meanwhile let’s say it’s about tools for research data management plans.&lt;/p&gt;
+
+&lt;p&gt;But, what does Higher-order Open Science mean? Probably you guessed it’s a pun. One for people with a background in Computer Science.&lt;/p&gt;
+
+&lt;blockquote class=&quot;twitter-tweet&quot; data-lang=&quot;es&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;often, i wish there were a file in OSS called ORIGINSTORY.md, explaining why you named your project as such, what puns you tried to play on&lt;/p&gt;&amp;mdash; Aure Moser (@auremoser) &lt;a href=&quot;https://twitter.com/auremoser/status/748326674572390400&quot;&gt;30 de junio de 2016&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;OK &lt;a href=&quot;https://twitter.com/auremoser&quot;&gt;@auremoser&lt;/a&gt;, here comes my explanation. In Computer Science, a higher-order function is one that returns a function as result, or can take one or more functions as arguments. Example:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;createMult&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;mult2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;createMult&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;mult2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// result is 6&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;In this example, the &lt;code class=&quot;highlighter-rouge&quot;&gt;createMult()&lt;/code&gt; function will return a diferent function for every given value of &lt;code class=&quot;highlighter-rouge&quot;&gt;m&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;My Higher-order Open Science is an open science effort (this blog/notebook) that will return (I expect) valuable results for open science.&lt;/p&gt;
+
+&lt;p&gt;This is the very first step of my trip. I wish you all enjoy it as much as I’ll do. There’s no place yet for comments in this notebook, but feel free to contact via &lt;a href=&quot;http://twitter.com/ajspadial&quot;&gt;twitter&lt;/a&gt;, &lt;a href=&quot;hoos@spadial.com&quot;&gt;email&lt;/a&gt; or even try with a &lt;a href=&quot;https://github.com/ajspadial/hoos/issues&quot;&gt;github issue&lt;/a&gt;.&lt;/p&gt;</content><summary type="html">Welcome to this blog. The main reason I’m writing it is to serve as an open notebook for my PhD. I’ll write on its goals soon, but meanwhile let’s say it’s about tools for research data management plans.</summary></entry></feed>
