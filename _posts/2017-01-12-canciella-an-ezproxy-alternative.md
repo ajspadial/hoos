@@ -7,7 +7,7 @@ lang: en
 ref: canciella
 ---
 
-Last year I worked a little on an #FOOS alternative to EZProxy. My first naïve tentative was coded in PHP and you can't find it at [http://github.com/inia-es/canciella](http://github.com/inia-es/canciella). *Canciella* is the asturian for gate, gateway.
+Last year I worked a little on an #FOOS alternative to EZProxy. My first naïve tentative was coded in PHP and you can find it at [http://github.com/inia-es/canciella](http://github.com/inia-es/canciella). *Canciella* is the asturian for gate, gateway.
 
 It lacks lots of details to be useful, but it gave me a glance about what we needed for a functional system. It was a prototype in the literal sense of the term.
 
@@ -41,11 +41,11 @@ TL;DR; EZProxy is a rewriting proxy server with mixed features from forward and 
 
 # My requirements
 
-**Technical requirements**
-* URL rewriting
-* Content rewriting
-* Domain cookies forwarding
-* LDAP auth (other auths may be welcomed too)
+**Technical requirements**  
+* URL rewriting  
+* Content rewriting  
+* Domain cookies forwarding  
+* LDAP auth (other auths may be welcomed too)  
 
 **Non functional requirements**
 
@@ -53,23 +53,23 @@ TL;DR; EZProxy is a rewriting proxy server with mixed features from forward and 
 
 Requirements were quite clear, and I was thinking about what language to work with. Non functional requirements were the main point to take this decision.
 
-After reading more and more about proxies, I changed my mind and decided to work on an Apache based proxy instead of writing my own module.
+After reading more and more about proxies, I changed my mind and decided to work on an Apache based proxy instead of writing my own proxy.
 
 # The Apache approach
 
-These is a list of Apache web server that provide the required features:
-* URL rewriting
-  * `mod_proxy`
-  * `mod_rewrite`
-  * `mod_proxy_http`
-  * `mod_proxy_ftp`
-  * `mod_proxy_connect`
-* Authentication
-  * `mod_authnz_ldap`
-* Content rewriting
-  * `mod_proxy_html`
+These is a list of Apache web server that provide the required features:  
+* URL rewriting  
+  * `mod_proxy`  
+  * `mod_rewrite`  
+  * `mod_proxy_http`  
+  * `mod_proxy_ftp`  
+  * `mod_proxy_connect`  
+* Authentication  
+  * `mod_authnz_ldap`  
+* Content rewriting  
+  * `mod_proxy_html`  
 
-I also wrote a small prototype to proxy domains the way EZProxy does. I know it's a naïve approach too, but it shows me how the full system may work. Future work will use Apache ENVVARS.
+I also wrote a small prototype for proxying domains the way EZProxy does. I know it's a naïve approach too, but it shows me how the full system may work. Future work will use Apache ENVVARS.
 {% highlight apache %}
 <VirtualHost *.canciella.net:80>
   RewriteEngine On
