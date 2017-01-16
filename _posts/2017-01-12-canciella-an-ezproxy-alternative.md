@@ -86,6 +86,6 @@ I also wrote a small prototype to proxy domains the way EZProxy does. I know it'
 {% endhighlight %}
 
 Lastly those are the hand-writted notes I took during my research. I used a mix of English and Spanish, and probably they are useless for anyone else but my ownself of yesterday.
-![EZProxy notes 1]({{site.url}}/assets/img/alt-ezproxy-1.jpg)
+![EZProxy notes 1]({{ base.url }}/assets/img/alt-ezproxy-1.jpg)
 
-![EZProxy notes 2]({{site.url}}/assets/img/alt-ezproxy-2.jpg)
+![EZProxy notes 2]({{ base.url }}/assets/img/alt-ezproxy-2.jpg)
