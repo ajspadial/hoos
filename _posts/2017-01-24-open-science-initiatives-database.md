@@ -9,7 +9,7 @@ ref: open-science-initiatives-database
 
 Today I read [this article](http://www.forbes.com/sites/drsarahbond/2017/01/23/dear-scholars-delete-your-account-at-academia-edu/#25df017f2ee0) about quiting Academia.edu. I started to think what makes different Academia.edu from other profit driven companies like Github - encouraged as an advantage of Zenodo in the same article. Later in the day I learn PaperHive was a thing (a company, in fact). Lurking their site I wondered how they were different from Hypothes.is (a non-profit). That drove me to discover the Annotating All Knowledge coalition. And I moved on to start this database.
 
-This database is a work in progress. I wanted to map the open science ecosystem for a time. This is still very biased, though I don't know how. I just took the list of participants in the [Annotating All Knowledge coalition](https://hypothes.is/annotating-all-knowledge/) and added some information to some of them. You can contribute at https://github.com/ajspadial/open-science-initatives, if you feel like it.
+This database is a work in progress. I wanted to map the open science ecosystem for a time. This is still very biased, though I don't know how. I just took the list of participants in the [Annotating All Knowledge coalition](https://hypothes.is/annotating-all-knowledge/) and added some information to some of them. You can contribute at [@ajspadial/open-sicence-initiatives](https://github.com/ajspadial/open-science-initatives), if you feel like it.
 
 Disclaimer: I'm especially interested in tools and services, so maybe this database will drift towards them, or prioritize them, in the future.
 
