@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-<div class="h-cardp-note" rel="me" u-url="http://hoos.spadial.com">
+<div class="h-card p-note" rel="me" u-url="http://hoos.spadial.com">
 My name's <span class="p-name">Antonio Sánchez-Padial</span>, and I'm a <span class="p-job-title">Research Software Engineer</span> at [<abbr title="Spanish National Institute for Research and Technology in Agriculture and Food" class="p-org">INIA</abbr>](http://www.inia.es). Most of my career has been in research centres: the [Spanish
   Geological Survey](http://www.igme.es) (IGME) and the [Centre for Humanities and Social Sciences](www.cchs.csic.es) (CCHS-CSIC). I've also seen some action in startups, as a senior software engineer at [source{d}](http://sourced.tech), then named Tyba.
 
