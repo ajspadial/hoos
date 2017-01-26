@@ -10,7 +10,12 @@ AKA tweets
       <li {% if tweet.twitter-id %} id="{{tweet.twitter-id}}" {% endif %}>
         <span class="post-meta">
           {% if tweet.twitter-id %}
-            <a href="https://twitter.com/ajspadial/status/{{ tweet.twitter-id }}">{{ tweet.date | date: "%b %-d, %Y"}}</a>
+            {% if tweet.author %}
+              {% assign author = tweet.author %}
+            {% else %}
+              {% assign author = "ajspadial" %}
+            {% endif %}
+            <a href="https://twitter.com/{{ author }}/status/{{ tweet.twitter-id }}">{{ tweet.date | date: "%b %-d, %Y"}}</a>
           {% else %}
             {{ tweet.date | date: "%b %-d, %Y"}}
           {% endif %}
