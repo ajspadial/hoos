@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  ":books: Bibliographical review"
+date:   2017-02-02 17:45:00 +0100
+
 categories: dmp phd rdm
 lang: en
 ref: bibliographical-review
