@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "LEARN-RDM 5th workshop"
+title:  ":books: LEARN-RDM 5th workshop"
 date:   2017-02-02 12:51:00 +0100
 categories: dmp phd rdm
 lang: en

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Bibliographical review"
+title:  ":books: Bibliographical review"
 categories: dmp phd rdm
 lang: en
 ref: bibliographical-review

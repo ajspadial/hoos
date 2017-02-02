@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Higher-order Open Science?"
+title:  ":books: Higher-order Open Science?"
 date:   2016-12-28 12:47:52 +0100
 categories: hoos meta
 lang: en
