@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "LEARN-RDM 5th workshop"
-date:   2017-01-26 19:36:52 +0100
+date:   2017-02-02 12:51:00 +0100
 categories: dmp phd rdm
 lang: en
 ref: learm-rdm-5th-workshop
