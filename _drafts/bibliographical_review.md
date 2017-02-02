@@ -18,7 +18,7 @@ Meanwhile, I learnt **actionable <abbr title="Data Management Plans">DMPs</abbr>
 
 * Stephanie Simms' [slides about the topic](http://es.slideshare.net/StephanieSimms/making-dmps-actionable-and-public)
 * [RDA Active DMP IG](https://www.rd-alliance.org/groups/active-data-management-plans.html)
-* [DMPTool blog post with a call to join a workshop/list on machine-actionable DMPs](https://blog.dmptool.org/2016/05/24/roadmap-team-building-exercises-us-edition/)
+* [DMPTool blog post with a call to join a workshop/list on machine-actionable DMPs](https://blog.dmptool.org/2016/12/14/dmp-themes-and-then-there-were-14/)
 * [CERN workshop on the topic](https://indico.cern.ch/event/520120/)
 
 > <small>*I feel like I should write down my introduction before reviewing all that material. Doing it in that way, I'll be able to compare my plans, thoughts and initiatives with the main thread in the topic, so that I can find **points of interest**. If I do it the other way, probably my brain will get washed and it will more difficult to create original thoughts*</small>
