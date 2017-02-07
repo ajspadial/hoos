@@ -11,3 +11,4 @@ permalink: /victorylog/
 covering both technological and strategic facets of open science and research data management.
 * **2016 Dec 28th** Created [this Open Notebook]({{site.url}})
 * **2017 Feb 02** I realize **webmentions** (pingbacks) are working, though they need some styling.
+* **2017 Feb 07** Webmentions earn a *sexy* style
