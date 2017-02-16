@@ -20,7 +20,7 @@ description: > # this means to ignore newlines until "baseurl:"
   management plans. I'll write about other related topics, specially in the open science and open
   data spectrum associated to agro sciences.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://hoos.spadial.org" # the base hostname & protocol for your site, e.g. http://example.com
+url: "http://hoos.spadial.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: ajspadial
 github_username:  ajspadial
 zotero_username: ajspadial
