@@ -12,3 +12,7 @@ covering both technological and strategic facets of open science and research da
 * **2016 Dec 28th** Created [this Open Notebook]({{site.url}})
 * **2017 Feb 02** I realize **webmentions** (pingbacks) are working, though they need some styling.
 * **2017 Feb 07** Webmentions earn a *sexy* style
+* **2017 Jan 26** Just learnt Action <abbr title="Data Management Plans">DMPs</abbr> are a thing
+* **2017 Feb 27** Understood the importance than **Systematic Literature Reviews** will play in this work. This is a major milestone. :tada:
+* **2017 Feb 28** I've got a draft table of contents for my PhD. This is a major milestone too. :tada:
+* **2017 Feb 28** I've got an activity schedule for my PhD :calendar:
