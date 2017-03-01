@@ -25,6 +25,13 @@ twitter_username: ajspadial
 github_username:  ajspadial
 zotero_username: ajspadial
 
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      comments: true
+
 # Build settings
 markdown: kramdown
 theme: minima
