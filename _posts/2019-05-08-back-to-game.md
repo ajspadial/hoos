@@ -13,7 +13,7 @@ Algunos cambios:
 * Ya no trabajo en un organismo público de investigación. Ahora trabajo en el Ministerio de Ciencia.
 * Y probablemente deje de escribir en inglés, por un tiempo.
 
-Tengo que pensar unas cuantas cosas todavía, en cuanto a la organización del blog, pero si tengo claros los temas sobre los que quiero hablar:
+Tengo que pensar unas cuantas cosas todavía, en cuanto a la organización del blog, pero sí tengo claros los temas sobre los que quiero hablar:
 
 * Desarrollo de *software* de investigación, *Research Software Engineering*
 * Gestión de datos de investigación, *Research Data Management*
